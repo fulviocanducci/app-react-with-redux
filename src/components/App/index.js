@@ -10,13 +10,13 @@ function App() {
   const dispatch = useDispatch();
 
   const [data, setData] = useState(initialData);
+
   const handleChange = (e) => {
-    let { name, value, type } = e.target;
-    if (type === 'checkbox') {
-      value = e.target.checked;
-    }
+    const { name, type } = e.target;
+    const value = type === 'checkbox' ? e.target.checked : e.target.value;
     setData((state) => ({ ...state, [name]: value }));
   };
+
   const onHandleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: todosAction.Add, payload: data });
@@ -37,7 +37,6 @@ function App() {
             <input
               type="checkbox"
               name="active"
-              value={data.active}
               checked={data.active}
               onChange={handleChange}
             />
