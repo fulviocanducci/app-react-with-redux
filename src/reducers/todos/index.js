@@ -1,17 +1,12 @@
+import { guid } from '../../utils';
 import todosAction from './actions';
 
-const initialState = [
-  {
-    id: 1,
-    name: 'Paul',
-    active: true,
-  },
-];
+const initialState = [];
 
 export default function todos(state = initialState, action) {
   switch (action?.type) {
     case todosAction.Add: {
-      return [...state, action.payload];
+      return [...state, { id: guid(), ...action.payload }];
     }
     case todosAction.Edit: {
       return state.map((x) => {
